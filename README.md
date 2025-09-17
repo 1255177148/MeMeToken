@@ -1,66 +1,10 @@
-## Foundry
+## MeMeToken
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+MeMeToken 是一个基于以太坊的智能合约，用于创建和管理 MeMe 代币。
 
-Foundry consists of:
+### 功能
 
--   **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
--   **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
--   **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
--   **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+在合约部署时，就会自动mint出1_000_000_000_000_000 * 10 ** 18个代币，地址为合约部署者的地址。
+并使用uniswap-v4来自动管理代币的流动性。
 
-## Documentation
-
-https://book.getfoundry.sh/
-
-## Usage
-
-### Build
-
-```shell
-$ forge build
-```
-
-### Test
-
-```shell
-$ forge test
-```
-
-### Format
-
-```shell
-$ forge fmt
-```
-
-### Gas Snapshots
-
-```shell
-$ forge snapshot
-```
-
-### Anvil
-
-```shell
-$ anvil
-```
-
-### Deploy
-
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
-
-### Cast
-
-```shell
-$ cast <subcommand>
-```
-
-### Help
-
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
-```
+用户在transfer代币时，会手续相应的手续费。这些手续费会先放入合约中，等手续费积累到阈值时，合约会自动将手续费的一般发给uniswap-v4，兑换ETH，并将兑换来的ETH分为两部分，一部分作为marketing tax转给marketing address，另一部分ETH和剩下的手续费token一起添加到流动性里。用来维持流动池中代币和ETH的平衡。
